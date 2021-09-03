@@ -1,0 +1,29 @@
+.Weather {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    > form {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        input {
+            padding: 1rem;
+            margin: 1rem 0 1rem 1rem;
+            font-size: 1rem;
+            border: none;
+            border-bottom: solid black 0.1rem;
+
+            &:focus {
+                background-color: rgb(158, 248, 195);
+            }
+        }
+        button {
+            padding: 1rem;
+        }
+        > select {
+            margin: 1rem 0;
+        }
+    }
+}

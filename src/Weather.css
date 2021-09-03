@@ -1,0 +1,30 @@
+.Weather {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.Weather > form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.Weather > form input {
+  padding: 1rem;
+  margin: 1rem 0 1rem 1rem;
+  font-size: 1rem;
+  border: none;
+  border-bottom: solid black 0.1rem;
+}
+.Weather > form input:focus {
+  background-color: #9ef8c3;
+}
+.Weather > form button {
+  padding: 1rem;
+}
+.Weather > form > select {
+  margin: 1rem 0;
+}
+
+/*# sourceMappingURL=Weather.css.map */
