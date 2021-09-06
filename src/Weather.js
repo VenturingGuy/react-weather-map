@@ -1,11 +1,59 @@
 import { useState } from "react";
 import './Weather.css'
-function Weather(props) {
-    const [ zip, setZip ] = useState('90242')
+function Weather() {
+    const [zip, setZip] = useState('90242')
     const [unit, setUnit] = useState('')
+    const UNIT_IDS = ['Metric', 'Imperial', 'Standard']
+    const UNIT_LABELS = ['Celsius', 'Fahrenheit', 'Kelvin']
+    
+    const UnitRadio = (props) => {
+        const {name, label} = props
+        return (
+            <label>
+                <input
+                    type="radio"
+                    name={name}
+                    checked={unit === label}
+                    onChange={() => setUnit(label)}
+                />
+            {label}</label>
+        )}
+
+    const renderUnitRadio = (name, label) => (
+        <UnitRadio
+            name={name}
+            label={label}
+        />
+    )
+
+    const UnitRadios = UNIT_IDS.map((_, index) => {
+        const name="unit"
+        const label = `${UNIT_IDS[index]}`
+        return renderUnitRadio(name, label)
+      });
+
+    const UnitSelect = (props) => {
+        const {name, label} = props
+        return (
+            <option value={name}>{label}</option>
+    )}
+
+    const renderUnitSelect = (name, label) => (
+        <UnitSelect
+            name={name}
+            label={label}
+        />
+    )
+
+    const UnitSelections = UNIT_LABELS.map((_, index) => {
+        const name= `${UNIT_IDS[index]}`
+        const label = `${UNIT_LABELS[index]}`
+        return renderUnitSelect(name, label)
+      });
+
     return (
         <div className="Weather">
-            <h1>{zip}</h1>
+            <h1>{zip} {unit}</h1>
             <form>
                 <div>
                     <input 
@@ -15,11 +63,15 @@ function Weather(props) {
                     />
                     <button>Submit</button>
                 </div>
-                <select onChange={e => setUnit(e.target.value)}>
-                    <option value="metric">Celsius</option>
-                    <option value="imperial">Fahrenheit</option>
-                    <option value="standard">Kelvin</option>
+
+                <select
+                    value={unit} 
+                    onChange={e => setUnit(e.target.value)}
+                >
+                    {UnitSelections}
                 </select>
+                <div>{UnitRadios}</div>
+                
             </form>
         </div>
     )
