@@ -1,8 +1,9 @@
 import { useState } from "react";
 import './Weather.css'
 function Weather() {
-    const [zip, setZip] = useState('90242')
+    const [zip, setZip] = useState('')
     const [unit, setUnit] = useState('')
+    const [data, setData] = useState(null)
     const UNIT_IDS = ['Metric', 'Imperial', 'Standard']
     const UNIT_LABELS = ['Celsius', 'Fahrenheit', 'Kelvin']
     
@@ -54,14 +55,18 @@ function Weather() {
     return (
         <div className="Weather">
             <h1>{zip} {unit}</h1>
-            <form>
+            <form obSubmit={e => {
+                e.preventDefault()
+                // load weather data
+                // setData(newData)
+            }}>
                 <div>
                     <input 
                         placeholder="Enter zip code here..."
                         value={zip}
                         onChange={e => setZip(e.target.value)}
                     />
-                    <button>Submit</button>
+                    <button type="submit">Submit</button>
                 </div>
 
                 <select
@@ -70,6 +75,7 @@ function Weather() {
                 >
                     {UnitSelections}
                 </select>
+                
                 <div>{UnitRadios}</div>
                 
             </form>
