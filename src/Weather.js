@@ -68,13 +68,25 @@ function Weather() {
         const json = await res.json()
 
         console.log(json)
-        // setData(newData)
+
+        // set data
+        const cod = json.cod
+        const message = json.message
+
+        // error handling
+        if (cod !== 200) {
+            setData({
+                cod, message        
+            })
+            return
+        }
         const temp = json.main.temp
         const desc = json.weather[0].description
         const feelsLike = json.main.feels_like
         const name = json.name
+        
         setData({
-            temp, desc, feelsLike, name
+            temp, desc, feelsLike, name, cod, message
         })
     }
 
