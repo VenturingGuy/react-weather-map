@@ -1,5 +1,6 @@
 import { useState } from "react";
 import './Weather.css'
+import WeatherDisplay from "./WeatherDisplay";
 function Weather() {
     const [zip, setZip] = useState('')
     const [unit, setUnit] = useState('')
@@ -69,12 +70,17 @@ function Weather() {
         console.log(json)
         // setData(newData)
         const temp = json.main.temp
-        return temp
+        const desc = json.weather[0].description
+        const feelsLike = json.main.feels_like
+        const name = json.name
+        setData({
+            temp, desc, feelsLike, name
+        })
     }
 
     return (
         <div className="Weather">
-            {data && <h1>{data.main.temp}</h1>}
+            {data && <WeatherDisplay {...data}/>}
             <form onSubmit={e => {
                 e.preventDefault()
                 fetchWeather()
